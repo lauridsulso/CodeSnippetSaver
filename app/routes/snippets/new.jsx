@@ -5,13 +5,13 @@ export async function action({ request }) {
   const form = await request.formData();
   const db = await connectDb();
   try {
-    const newBook = await db.models.Snippet.create({
+    const newSnippet = await db.models.Snippet.create({
       title: form.get("title"),
       language: form.get("language"),
       snippet: form.get("snippet"),
       description: form.get("description"),
     });
-    return redirect(`/books/${newBook._id}`);
+    return redirect(`/snippets/${newSnippet._id}`);
   } catch (error) {
     return json(
       { errors: error.errors, values: Object.fromEntries(form) },
@@ -20,7 +20,7 @@ export async function action({ request }) {
   }
 }
 
-export default function CreateBook() {
+export default function CreateSnippet() {
   const actionData = useActionData();
   return (
     <div>
