@@ -3,7 +3,7 @@ import connectDb from "~/db/connectDb.server.js";
 
 export async function loader({ params }) {
   const db = await connectDb();
-  const book = await db.models.Book.findById(params.bookId);
+  const book = await db.models.Snippet.findById(params.bookId);
   if (!book) {
     throw new Response(`Couldn't find book with id ${params.bookId}`, {
       status: 404,

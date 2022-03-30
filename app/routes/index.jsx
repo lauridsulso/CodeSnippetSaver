@@ -3,7 +3,7 @@ import connectDb from "~/db/connectDb.server.js";
 
 export async function loader() {
   const db = await connectDb();
-  const books = await db.models.Book.find();
+  const books = await db.models.Snippet.find();
   return books;
 }
 
@@ -22,7 +22,8 @@ export default function Index() {
             <li key={book._id}>
               <Link
                 to={`/books/${book._id}`}
-                className="text-blue-600 hover:underline">
+                className="text-blue-600 hover:underline"
+              >
                 {book.title}
               </Link>
             </li>
