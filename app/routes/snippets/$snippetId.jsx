@@ -28,16 +28,28 @@ export const action = async ({ request, params }) => {
 
 export default function SnippetPage() {
   const snippet = useLoaderData();
+
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">{snippet.title}</h1>
-      <code>
+      <h1 className="text-2xl font-bold mb-4">Code snippet</h1>
+      <div>
+        <h1 className="text-xl font-bold">
+          {snippet.title}
+          <span className="text-xl font-normal"> - {snippet.language}</span>
+        </h1>
+        <p className="italic">{snippet.description}</p>
+        <pre className="bg-gray-200 p-6 mt-4">{snippet.snippet}</pre>
+      </div>
+
+      {/* <code>
         <pre>{JSON.stringify(snippet, null, 2)}</pre>
-      </code>
+      </code> */}
       <div>
         <form method="POST">
           <input type="hidden" name="_method" value="delete" />
-          <button>Delete snippet</button>
+          <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded mt-6">
+            Delete snippet
+          </button>
         </form>
       </div>
     </div>

@@ -41,15 +41,36 @@ export default function CreateSnippet() {
         <label htmlFor="language" className="block">
           Programming language
         </label>
-        <input
-          type="text"
-          name="language"
+
+        <select
           defaultValue={actionData?.values.language}
+          name="language"
           id="language"
-          className={
-            actionData?.errors.language ? "border-2 border-red-500" : null
-          }
-        />
+          className="form-select form-select-sm
+          appearance-none
+          block
+          px-2
+          py-1
+          text-sm
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding bg-no-repeat
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+        >
+          <option value="">Select language</option>
+          <option value="HTML">HTML</option>
+          <option value="CSS">CSS</option>
+          <option value="Javascript">Javascript</option>
+          <option value="C#">C#</option>
+          <option value="Python">Python</option>
+          <option value="Php">Php</option>
+          <option value="Other language">Other language</option>
+        </select>
         <label htmlFor="snippet" className="block">
           Code snippet
         </label>
@@ -83,7 +104,7 @@ export default function CreateSnippet() {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10"
           type="submit"
         >
-          Save
+          Create new snippet
         </button>
       </Form>
     </div>
