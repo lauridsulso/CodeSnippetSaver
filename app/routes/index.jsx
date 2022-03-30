@@ -12,11 +12,9 @@ export default function Index() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Remix + Mongoose</h1>
-      <h2 className="text-lg font-bold mb-3">
-        Here are a few of my favorite books:
-      </h2>
-      <ul className="ml-5 list-disc">
+      <h1 className="text-2xl mb-4">Code snippets</h1>
+      <h2 className="text-lg mb-3">Select the code snippet you want to use:</h2>
+      <ul className="">
         {books.map((book) => {
           return (
             <li key={book._id}>

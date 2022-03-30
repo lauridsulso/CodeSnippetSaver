@@ -24,7 +24,7 @@ export default function CreateBook() {
   const actionData = useActionData();
   return (
     <div>
-      <h1>Create code snippet</h1>
+      <h1 className="text-xl">Create code snippet</h1>
       <Form method="post">
         <label htmlFor="title" className="block">
           Title
@@ -79,7 +79,12 @@ export default function CreateBook() {
           <p className="text-red-500">{actionData.errors.title.message}</p>
         )}
         <br />
-        <button type="submit">Save</button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10"
+          type="submit"
+        >
+          Save
+        </button>
       </Form>
     </div>
   );
