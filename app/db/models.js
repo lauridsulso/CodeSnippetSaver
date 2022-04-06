@@ -26,6 +26,10 @@ const snippetSchema = new Schema({
   favorite: {
     type: Boolean,
   },
+  timeCreated: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export const models = [

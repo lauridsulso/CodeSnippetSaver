@@ -1,23 +1,39 @@
-import { useLoaderData, Link, useSubmit, Form, Outlet } from "remix";
+import {
+  useLoaderData,
+  Link,
+  useSubmit,
+  Form,
+  Outlet,
+  useLocation,
+} from "remix";
 import connectDb from "~/db/connectDb.server.js";
 
 export async function loader({ request }) {
   const db = await connectDb();
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("q");
+  const sortQuery = url.searchParams.get("s");
   const snippets = await db.models.Snippet.find(
     searchQuery
       ? {
           title: { $regex: new RegExp(searchQuery, "i") },
         }
       : {}
+  ).sort(
+    sortQuery
+      ? { [sortQuery]: -1, title: 1 }
+      : {
+          title: 1,
+        }
   );
+
   return snippets;
 }
 
 export default function Index() {
   const snippets = useLoaderData();
   const submit = useSubmit();
+  const location = useLocation();
 
   return (
     <div className="sm:flex:none md:flex w-full">
@@ -43,6 +59,22 @@ export default function Index() {
           />
         </Form>
 
+        <Form
+          className="sortForm"
+          method="get"
+          onChange={(e) => {
+            submit(e.currentTarget);
+          }}
+          action=""
+        >
+          <select name="s" id="s">
+            <option value="title">Title</option>
+            <option value="description">Description</option>
+            <option value="favorite">Favorite</option>
+            <option value="timeCreated">Time created</option>
+          </select>
+        </Form>
+
         <ul className="">
           {snippets.map((snippet) => {
             return (
@@ -51,7 +83,7 @@ export default function Index() {
                 key={snippet._id}
               >
                 <Link
-                  to={`/snippets/${snippet._id}`}
+                  to={`/snippets/${snippet._id}${location.search}`}
                   className="focus:font-bold p-1"
                 >
                   {snippet.title}
