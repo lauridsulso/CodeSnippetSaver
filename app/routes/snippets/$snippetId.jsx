@@ -38,12 +38,16 @@ export const action = async ({ request, params }) => {
 
 export default function SnippetPage() {
   const snippet = useLoaderData();
+  const dateTime = new Date(snippet.timeCreated);
+  const date = dateTime.getDate();
+  const month = dateTime.getMonth() + 1;
   return (
     <div>
       <div>
         <div>
           <h1 className="text-2xl font-bold">
-            {snippet.title}{" "}
+            {snippet.title}
+
             <div className="float-right">
               <form method="POST">
                 <input type="hidden" name="_method" value="favorite" />
@@ -68,6 +72,7 @@ export default function SnippetPage() {
             <span className="text-xl font-normal"> - {snippet.language}</span>
           </h1>
         </div>
+        <p>Added {`${date}/${month}`}</p>
         <p className="italic">- {snippet.description}</p>
         <pre className="text-green-600 bg-gray-800 p-6 mt-4 whitespace-normal">
           {snippet.snippet}
