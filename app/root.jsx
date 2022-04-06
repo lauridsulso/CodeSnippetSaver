@@ -31,16 +31,20 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-slate-100 text-slate-800 font-sans p-4">
-        <header className="pb-3 mb-4 border-b-2">
-          <Link to="/" className="hover:underline text-blue-600">
-            Home
+      <body className="bg-gray-100 text-slate-800 font-sans p-4">
+        <header className="pb-3 mb-4">
+          <Link
+            to="/"
+            className="hover:underline focus:font-bold text-blue-600"
+          >
+            Snippets |
           </Link>
+
           <Link
             to="/snippets/new"
-            className="ml-3 hover:underline text-blue-600"
+            className="ml-3 hover:underline focus:font-bold text-blue-600"
           >
-            New snippet
+            Add new
           </Link>
         </header>
         <Outlet />

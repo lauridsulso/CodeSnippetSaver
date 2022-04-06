@@ -91,9 +91,9 @@ export default function CreateSnippet() {
           name="description"
           defaultValue={actionData?.values.description}
           id="description"
-          className={
-            actionData?.errors.description ? "border-2 border-red-500" : null
-          }
+          className={`
+            ${actionData?.errors.description ? "border-2 border-red-500" : null}
+          `}
         />
 
         {actionData?.errors.title && (
