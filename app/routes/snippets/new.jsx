@@ -74,7 +74,7 @@ export default function CreateSnippet() {
         <label htmlFor="snippet" className="block">
           Code snippet
         </label>
-        <input
+        <textarea
           type="text"
           name="snippet"
           defaultValue={actionData?.values.snippet}
@@ -86,12 +86,12 @@ export default function CreateSnippet() {
         <label htmlFor="description" className="block">
           Code description
         </label>
-        <input
+        <textarea
           type="text"
           name="description"
           defaultValue={actionData?.values.description}
           id="description"
-          className={`
+          className={`resize-y
             ${actionData?.errors.description ? "border-2 border-red-500" : null}
           `}
         />

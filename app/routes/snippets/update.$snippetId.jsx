@@ -84,7 +84,7 @@ export default function SnippetUpdate() {
         <label htmlFor="description" className="block">
           Description
         </label>
-        <input
+        <textarea
           type="text"
           name="description"
           defaultValue={actionData?.values.description ?? snippet.description}
@@ -96,7 +96,7 @@ export default function SnippetUpdate() {
         <label htmlFor="snippet" className="block">
           Snippet
         </label>
-        <input
+        <textarea
           type="text"
           name="snippet"
           defaultValue={actionData?.values.snippet ?? snippet.snippet}
