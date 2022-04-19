@@ -1,4 +1,4 @@
-# Welcome to Remix!
+# Simple code snippet saver made with Remix, Mongoose and Tailwind
 
 - [Remix Docs](https://remix.run/docs)
 
