@@ -1,26 +1,34 @@
-import { Form, useLoaderData, redirect } from "remix";
+import { Form, useLoaderData, redirect, json } from "remix";
+import { getSession, commitSession } from "../sessions";
 
-export function action() {
+export async function action({ request }) {
+  const session = await getSession(request.headers.get("Cookie"));
+  session.set("userId", 420);
   return redirect("/login", {
     headers: {
-      "Set-Cookie": "userId=1;Max-Age=10;HttpOnly",
+      "Set-Cookie": await commitSession(session),
     },
   });
 }
 
 export async function loader({ request }) {
-  const cookie = request.headers.get("Cookie");
-  return cookie;
+  const session = await getSession(request.headers.get("Cookie"));
+  return json({
+    userId: session.get("userId"),
+  });
 }
 
 export default function Login() {
-  const readcookies = useLoaderData();
-  console.log(readcookies);
+  const userId = useLoaderData();
+  console.log(userId);
   return (
     <div>
-      {readcookies}
+      <pre>{JSON.stringify(userId)}</pre>
       <Form method="post" reloadDocument>
-        <input type="submit" />
+        <input
+          className="inline-block align-baseline font-bold bg-gray-200 rounded p-2 text-sm text-blue-500 hover:text-blue-800"
+          type="submit"
+        />
       </Form>
     </div>
   );
