@@ -7,7 +7,7 @@ import {
   useLocation,
 } from "remix";
 import connectDb from "~/db/connectDb.server.js";
-import { requireUserSession } from "~/sessions";
+import { requireUserSession } from "~/sessions.server";
 
 export async function loader({ request }) {
   const db = await connectDb();

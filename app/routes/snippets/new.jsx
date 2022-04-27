@@ -1,5 +1,5 @@
 import { Form, redirect, json, useActionData } from "remix";
-import { getSession } from "~/sessions";
+import { getSession } from "~/sessions.server";
 import connectDb from "~/db/connectDb.server";
 
 // check if session is valid - if not, redirect to login

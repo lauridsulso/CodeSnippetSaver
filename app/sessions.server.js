@@ -1,5 +1,5 @@
 import { createCookieSessionStorage, redirect } from "remix";
-import { sessionCookie } from "./cookies";
+import { sessionCookie } from "./cookies.server";
 
 export async function requireUserSession(request) {
   // get the session
