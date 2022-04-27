@@ -7,9 +7,11 @@ import {
   useLocation,
 } from "remix";
 import connectDb from "~/db/connectDb.server.js";
+import { requireUserSession } from "~/sessions";
 
 export async function loader({ request }) {
   const db = await connectDb();
+  const session = await requireUserSession(request);
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("q");
   const sortQuery = url.searchParams.get("s");
@@ -26,8 +28,9 @@ export async function loader({ request }) {
           title: 1,
         }
   );
-
-  return snippets;
+  if (session.has("userId")) {
+    return snippets;
+  }
 }
 
 export default function Index() {
@@ -54,7 +57,6 @@ export default function Index() {
             autoComplete="off"
             type="search"
             name="q"
-            type="text"
             className="mb-10"
           />
         </Form>

@@ -4,6 +4,7 @@ import connectDb from "~/db/connectDb.server.js";
 
 export async function loader({ params }) {
   const db = await connectDb();
+
   const snippet = await db.models.Snippet.findById(params.snippetId);
   if (!snippet) {
     throw new Response(
@@ -17,6 +18,7 @@ export async function loader({ params }) {
 }
 
 //DELETE SELECTED CODE SNIPPET
+
 export const action = async ({ request, params }) => {
   const db = await connectDb();
   const form = await request.formData();
@@ -124,7 +126,7 @@ export function CatchBoundary() {
   return (
     <div>
       <h1>
-        {caught.status} {caught.statusText}
+        {caught.status} {caught.statusText}
       </h1>
       <h2>{caught.data}</h2>
     </div>

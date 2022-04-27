@@ -1,5 +1,17 @@
 import { Form, redirect, json, useActionData } from "remix";
+import { getSession } from "~/sessions";
 import connectDb from "~/db/connectDb.server";
+
+// check if session is valid - if not, redirect to login
+export async function loader({ request }) {
+  const session = await getSession(request.headers.get("Cookie"));
+  if (!session.get("userId")) {
+    return redirect("/Login");
+  }
+  return json({
+    userId: session.get("userId"),
+  });
+}
 
 export async function action({ request }) {
   const form = await request.formData();
