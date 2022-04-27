@@ -1,6 +1,7 @@
 import { Form, useLoaderData, redirect, json } from "remix";
 import { getSession, commitSession } from "../sessions";
 import connectDb from "~/db/connectDb.server.js";
+import bcrypt from "bcryptjs";
 
 export async function action({ request }) {
   const form = await request.formData();
@@ -8,10 +9,17 @@ export async function action({ request }) {
 
   const user = await db.models.User.findOne({
     email: form.get("email").trim(),
-    password: form.get("password").trim(),
   });
 
+  let isCorrectPassword = false;
   if (user) {
+    isCorrectPassword = await bcrypt.compare(
+      form.get("password").trim(),
+      user.password
+    );
+  }
+
+  if (user && isCorrectPassword) {
     const session = await getSession(request.headers.get("Cookie"));
     session.set("userId", user._id);
     return redirect("/Login", {
@@ -20,7 +28,7 @@ export async function action({ request }) {
       },
     });
   } else {
-    return json("hello");
+    return json("error");
   }
 }
 
